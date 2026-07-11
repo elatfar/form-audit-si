@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Assessment System - Kinarya</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-deep: #0B1226;
+            --navy-mid: #141B33;
+            --amber: #FFB020;
+            --coral: #FF4757;
+            --emerald: #06D6A0;
+            --bg-light: #FAF9F6;
+            --ink: #1A1F36;
+            --muted: #6B7280;
+            --line: #E7E4DC;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --nav-height: 76px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--ink);
+            background: var(--bg-light);
+        }
+
+        h1, h2, h3, .display {
+            font-family: var(--font-display);
+        }
+
+        /* ===== TOP NAVBAR ===== */
+        #topNav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: var(--nav-height);
+            padding: 0 8vw;
+            background: rgba(11,18,38,0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--amber), #ff9d2e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--navy-deep);
+        }
+
+        .nav-brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.15;
+        }
+
+        .nav-brand-text strong {
+            font-family: var(--font-display);
+            font-size: 15px;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+
+        .nav-brand-text span {
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.72);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-cta {
+            background: rgba(255,176,32,0.12);
+            border: 1px solid rgba(255,176,32,0.4);
+            color: var(--amber);
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            font-weight: 600;
+            font-family: var(--font-display);
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--amber);
+            color: var(--navy-deep);
+        }
+
+        @media (max-width: 860px) {
+            .nav-links a:not(.nav-cta-wrap) { display: none; }
+            #topNav { padding: 0 6vw; }
+        }
+
+        /* ===== LANDING PAGE SECTION ===== */
+        #landingPage {
+            min-height: calc(100vh - var(--nav-height));
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 40px;
+            background:
+                radial-gradient(circle at 85% 20%, rgba(255,176,32,0.18), transparent 45%),
+                radial-gradient(circle at 10% 85%, rgba(6,214,160,0.14), transparent 45%),
+                linear-gradient(160deg, var(--navy-deep) 0%, var(--navy-mid) 100%);
+            color: #fff;
+            padding: 60px 8vw;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #landingPage::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+            background-size: 56px 56px;
+            mask-image: radial-gradient(circle at 30% 40%, rgba(0,0,0,0.9), transparent 70%);
+            pointer-events: none;
+        }
+
+        #landingPage > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--amber);
+            background: rgba(255,176,32,0.12);
+            border: 1px solid rgba(255,176,32,0.35);
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 26px;
+        }
+
+        .eyebrow .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--emerald);
+            box-shadow: 0 0 8px var(--emerald);
+            animation: pulse-dot 1.6s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.75); }
+        }
+
+        .landing-header h1 {
+            font-size: clamp(34px, 4.6vw, 54px);
+            line-height: 1.08;
+            font-weight: 700;
+            margin-bottom: 22px;
+            letter-spacing: -0.01em;
+        }
+
+        .landing-header h1 .accent {
+            color: var(--amber);
+        }
+
+        .landing-header p.lede {
+            font-size: 18px;
+            max-width: 520px;
+            opacity: 0.88;
+            margin-bottom: 34px;
+        }
+
+        .cta-row {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--amber), #ff9d2e);
+            color: var(--navy-deep);
+            padding: 17px 34px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: var(--font-display);
+            letter-spacing: 0.01em;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 10px 30px rgba(255,176,32,0.35);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 36px rgba(255,176,32,0.5);
+        }
+
+        .cta-button:focus-visible {
+            outline: 3px solid #fff;
+            outline-offset: 3px;
+        }
+
+        .cta-note {
+            font-size: 13px;
+            color: rgba(255,255,255,0.65);
+            font-family: var(--font-mono);
+        }
+
+        /* Hero gauge teaser */
+        .hero-gauge-wrap {
+            display: flex;
+            justify-content: center;
+        }
+
+        .gauge-card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 20px;
+            padding: 32px 28px 24px;
+            backdrop-filter: blur(10px);
+            max-width: 360px;
+            width: 100%;
+        }
+
+        .gauge-card-label {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .gauge-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .needle-group {
+            transform-origin: 120px 128px;
+        }
+
+        .needle-idle {
+            animation: needle-scan 2.6s ease-in-out infinite;
+        }
+
+        @keyframes needle-scan {
+            0%, 100% { transform: rotate(-55deg); }
+            50% { transform: rotate(55deg); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .needle-idle, .eyebrow .dot { animation: none; }
+        }
+
+        .gauge-caption {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            margin-top: 8px;
+        }
+
+        .gauge-ticks {
+            display: flex;
+            justify-content: space-between;
+            margin-top: -6px;
+            padding: 0 6px;
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ===== RED FLAGS SECTION ===== */
+        #redFlags {
+            background: var(--bg-light);
+            padding: 90px 8vw;
+        }
+
+        .section-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--coral);
+            margin-bottom: 14px;
+        }
+
+        #redFlags h2.headline {
+            font-size: clamp(26px, 3.2vw, 36px);
+            max-width: 720px;
+            margin-bottom: 46px;
+            color: var(--ink);
+        }
+
+        .flags-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+            max-width: 980px;
+        }
+
+        .flag-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--coral);
+            border-radius: 10px;
+            padding: 22px 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .flag-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(11,18,38,0.08);
+        }
+
+        .flag-mark {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--coral);
+            line-height: 1;
+        }
+
+        .flag-item p {
+            font-size: 15.5px;
+            color: var(--ink);
+        }
+
+        .redflags-footer {
+            margin-top: 40px;
+            font-size: 15px;
+            color: var(--muted);
+            max-width: 640px;
+        }
+
+        .redflags-footer strong {
+            color: var(--ink);
+        }
+
+        /* ===== FORM SECTION ===== */
+        #formSection {
+            display: none;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 70px 24px 100px;
+            background: var(--bg-light);
+        }
+
+        #formSection.show {
+            display: block;
+        }
+
+        .form-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 44px;
+            box-shadow: 0 10px 40px rgba(11,18,38,0.06);
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--ink);
+            font-size: 14.5px;
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 13px 14px;
+            border: 2px solid var(--line);
+            border-radius: 8px;
+            font-size: 14.5px;
+            font-family: var(--font-body);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background: #fff;
+            color: var(--ink);
+        }
+
+        select:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--amber);
+            box-shadow: 0 0 0 4px rgba(255,176,32,0.15);
+        }
+
+        #formSection h2 {
+            color: var(--ink);
+            font-size: clamp(24px, 3vw, 30px);
+            margin-bottom: 10px;
+        }
+
+        .form-subtitle {
+            color: var(--muted);
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            margin-top: 34px;
+            margin-bottom: 4px;
+            color: var(--navy-mid);
+            background: #FFF6E6;
+            padding: 12px 16px;
+            border-left: 5px solid var(--amber);
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 15px;
+            font-family: var(--font-display);
+        }
+
+        #siForm button {
+            padding: 16px 20px;
+            background: linear-gradient(135deg, var(--navy-deep), var(--navy-mid));
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: var(--font-display);
+            transition: all 0.25s ease;
+            margin-top: 26px;
+            box-shadow: 0 8px 24px rgba(11,18,38,0.25);
+        }
+
+        #siForm button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(11,18,38,0.35);
+        }
+
+        #siForm button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        #loadingStatus {
+            text-align: center;
+            font-weight: 600;
+            color: var(--navy-mid);
+            padding: 30px 20px;
+            font-size: 15.5px;
+            font-family: var(--font-mono);
+        }
+
+        /* ===== DIAGNOSIS / HASIL SECTION ===== */
+        #hasil {
+            margin-top: 40px;
+            display: none;
+        }
+
+        .verdict-card {
+            border-radius: 18px;
+            padding: 38px 34px;
+            background: linear-gradient(160deg, var(--navy-deep), var(--navy-mid));
+            color: #fff;
+            box-shadow: 0 20px 50px rgba(11,18,38,0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verdict-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 6px;
+        }
+
+        .verdict-headline {
+            font-size: clamp(22px, 3vw, 28px);
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .verdict-body {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .verdict-gauge-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .verdict-badge {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 7px 16px;
+            border-radius: 100px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0.03em;
+        }
+
+        .verdict-score {
+            font-family: var(--font-mono);
+            font-size: 40px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .verdict-score span {
+            font-size: 16px;
+            opacity: 0.6;
+            font-weight: 500;
+        }
+
+        .verdict-details p {
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: rgba(255,255,255,0.92);
+        }
+
+        .verdict-details p strong {
+            color: var(--amber);
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+
+        .verdict-id {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255,255,255,0.14);
+        }
+
+        .verdict-cta {
+            margin-top: 26px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.14);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .verdict-cta p {
+            font-size: 14.5px;
+            color: rgba(255,255,255,0.8);
+            max-width: 380px;
+        }
+
+        .verdict-cta button {
+            width: auto;
+            margin-top: 0;
+            background: linear-gradient(135deg, var(--amber), #ff9d2e);
+            color: var(--navy-deep);
+            padding: 13px 24px;
+            box-shadow: 0 8px 24px rgba(255,176,32,0.3);
+        }
+
+        .verdict-cta button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ===== FOOTER ===== */
+        #siteFooter {
+            background: var(--navy-deep);
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 40px 8vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        #siteFooter .nav-brand-text strong {
+            font-size: 14px;
+        }
+
+        .footer-meta {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            text-align: right;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 860px) {
+            #landingPage {
+                grid-template-columns: 1fr;
+                padding: 50px 6vw 60px;
+                text-align: center;
+            }
+
+            .landing-header p.lede {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cta-row {
+                justify-content: center;
+            }
+
+            .hero-gauge-wrap {
+                order: -1;
+            }
+
+            .gauge-card {
+                max-width: 300px;
+            }
+
+            .flags-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-card {
+                padding: 28px 20px;
+            }
+
+            .verdict-body {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .verdict-gauge-wrap {
+                margin: 0 auto;
+            }
+
+            .verdict-cta {
+                justify-content: center;
+                text-align: center;
+            }
+
+            #siteFooter {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .footer-meta {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP NAVBAR -->
+    <nav id="topNav">
+        <div class="nav-brand">
+            <div class="nav-brand-mark">K</div>
+            <div class="nav-brand-text">
+                <strong>Kinarya</strong>
+                <span>Business Efficiency Score</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#redFlags">Gejala Umum</a>
+            <button class="nav-cta" onclick="scrollToForm()">Mulai Diagnostik</button>
+        </div>
+    </nav>
+
+    <!-- LANDING PAGE -->
+    <div id="landingPage">
+        <div class="landing-header">
+            <span class="eyebrow"><span class="dot"></span> Diagnostik Kesiapan Digital</span>
+            <h1>Sistem Anda <span class="accent">Aman</span>, atau Diam‑Diam Bikin Rugi?</h1>
+            <p class="lede">Jawab beberapa pertanyaan, dan dapatkan diagnosis yang jelas: sistem Anda masih layak dipakai, atau ini saatnya berubah sebelum kompetitor duluan melaju.</p>
+            <div class="cta-row">
+                <button class="cta-button" onclick="scrollToForm()">Cek Kesiapan Sistem Saya →</button>
+                <span class="cta-note">± 5 menit · hasil langsung keluar</span>
+            </div>
+        </div>
+
+
+        <div class="hero-gauge-wrap">
+            <div class="gauge-card">
+                <div class="gauge-card-label">Skala Kesiapan Digital</div>
+                <svg viewBox="0 0 240 150" class="gauge-svg">
+                    <defs>
+                        <linearGradient id="gaugeGradHero" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#FF4757" />
+                            <stop offset="50%" stop-color="#FFB020" />
+                            <stop offset="100%" stop-color="#06D6A0" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M20 130 A100 100 0 0 1 220 130" fill="none" stroke="url(#gaugeGradHero)" stroke-width="16" stroke-linecap="round" />
+                    <g class="needle-group needle-idle">
+                        <line x1="120" y1="128" x2="120" y2="48" stroke="#fff" stroke-width="4" stroke-linecap="round" />
+                        <circle cx="120" cy="128" r="8" fill="#fff" />
+                    </g>
+                </svg>
+                <div class="gauge-ticks"><span>0</span><span>50</span><span>100</span></div>
+                <div class="gauge-caption">Menunggu data assessment Anda...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RED FLAGS / URGENSI SECTION -->
+    <div id="redFlags">
+        <div class="section-eyebrow">Tanda-tanda yang sering diabaikan</div>
+        <h2 class="headline">Kalau salah satu ini kerasa familiar, sistem Anda mungkin sedang menahan bisnis Anda tumbuh</h2>
+        <div class="flags-grid">
+            <div class="flag-item">
+                <span class="flag-mark">✕</span>
+                <p>Tim masih rekap manual di Excel yang gampang typo dan beda versi antar orang.</p>
+            </div>
+            <div class="flag-item">
+                <span class="flag-mark">✕</span>
+                <p>Data antar divisi tidak nyambung, laporan selalu telat saat paling dibutuhkan.</p>
+            </div>
+            <div class="flag-item">
+                <span class="flag-mark">✕</span>
+                <p>Sistem sering lemot atau error justru saat transaksi sedang ramai-ramainya.</p>
+            </div>
+            <div class="flag-item">
+                <span class="flag-mark">✕</span>
+                <p>Tidak ada yang bisa memastikan: masalahnya di proses kerja, atau memang di sistemnya.</p>
+            </div>
+        </div>
+        <p class="redflags-footer"><strong>Assessment ini memberi kepastian itu</strong> — bukan tebakan, bukan opini tim internal, tapi skor dan rekomendasi berbasis jawaban Anda sendiri.</p>
+    </div>
+
+    <!-- ASSESSMENT FORM SECTION -->
+    <div id="formSection">
+        <div class="form-card">
+            <h2 id="mainTitle">Loading Assessment...</h2>
+            <p class="form-subtitle">Isi sejujurnya — semakin akurat jawaban, semakin tajam rekomendasinya.</p>
+            <div id="loadingStatus">Mengambil konfigurasi kuesioner dari Excel...</div>
+
+            <form id="siForm" style="display: none;">
+                <!-- Identitas Perusahaan Manual -->
+                <div class="form-group">
+                    <label for="namaPerusahaan">Nama Perusahaan / Organisasi:</label>
+                    <input type="text" id="namaPerusahaan" required placeholder="Masukkan nama organisasi">
+                </div>
+
+                <div class="form-group">
+                    <label for="industry">Industri / Bidang Usaha:</label>
+                    <input type="text" id="industry" placeholder="Contoh: Retail, Manufaktur, Jasa">
+                </div>
+
+                <!-- Wadah Tempat Pertanyaan dari Excel akan diletakkan secara Otomatis -->
+                <div id="dynamicQuestionsContainer"></div>
+
+                <button type="submit" id="submitBtn">Kirim & Cek Diagnosis Sistem Saya</button>
+            </form>
+
+            <div id="hasil">
+                <div class="verdict-card">
+                    <div class="verdict-eyebrow">Hasil Diagnostik</div>
+                    <div class="verdict-headline">🎯 Diagnosis Kesiapan Sistem Anda</div>
+                    <div class="verdict-body">
+                        <div class="verdict-gauge-wrap">
+                            <svg viewBox="0 0 240 150" class="gauge-svg" style="max-width:180px;">
+                                <defs>
+                                    <linearGradient id="gaugeGradResult" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#FF4757" />
+                                        <stop offset="50%" stop-color="#FFB020" />
+                                        <stop offset="100%" stop-color="#06D6A0" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M20 130 A100 100 0 0 1 220 130" fill="none" stroke="url(#gaugeGradResult)" stroke-width="16" stroke-linecap="round" />
+                                <g class="needle-group" id="resultNeedle" style="transform: rotate(-90deg);">
+                                    <line x1="120" y1="128" x2="120" y2="48" stroke="#fff" stroke-width="4" stroke-linecap="round" />
+                                    <circle cx="120" cy="128" r="8" fill="#fff" />
+                                </g>
+                            </svg>
+                            <div class="verdict-score"><span id="resSkor">0</span><span> / 100</span></div>
+                            <div class="verdict-badge" id="verdictBadge">MENGHITUNG...</div>
+                        </div>
+                        <div class="verdict-details">
+                            <p><strong>Tingkat Kematangan</strong> <span id="resLevel"></span></p>
+                            <p><strong>Rekomendasi Solusi</strong> <span id="recAlat"></span></p>
+                            <p><strong>Kebutuhan Modul Utama</strong> <span id="recModul"></span></p>
+                            <div class="verdict-id">ID Assessment: <span id="resId"></span></div>
+                        </div>
+                    </div>
+                    <div class="verdict-cta">
+                        <p>Simpan atau tangkap layar hasil ini — jadi bahan diskusi konkret dengan tim Anda soal langkah berikutnya.</p>
+                        <button type="button" onclick="window.print()">Simpan Hasil Ini</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="siteFooter">
+        <div class="nav-brand">
+            <div class="nav-brand-mark">K</div>
+            <div class="nav-brand-text">
+                <strong>Kinarya</strong>
+                <span>Business Efficiency Score</span>
+            </div>
+        </div>
+        <div class="footer-meta">© 2026 Kinarya · Digital Assessment System<br>Skor dihitung otomatis dari jawaban Anda sendiri</div>
+    </footer>
+
+    <script>
+        // Fungsi untuk scroll ke form
+        function scrollToForm() {
+            const formSection = document.getElementById('formSection');
+            formSection.classList.add('show');
+            formSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // TEMPELKAN URL WEB APP CURRENT DEPLOYMENT ANDA DI SINI
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxGi1v6s1KFfTWxBjlAXW4sQNL-J8xJp7ypgPzUaj5TwmeylQBFRvZ_0A8xdLy-ItRSNQ/exec';
+
+        // 1. AMBIL PERTANYAAN SECARA DINAMIS SAAT HALAMAN DI-LOAD
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch(WEB_APP_URL)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        document.getElementById('mainTitle').innerText = data.title;
+                        renderQuestions(data.questions);
+                        document.getElementById('loadingStatus').style.display = 'none';
+                        document.getElementById('siForm').style.display = 'block';
+                    } else {
+                        document.getElementById('loadingStatus').innerText = "Gagal memuat konfigurasi Excel.";
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById('loadingStatus').innerText = "Gagal menyambungkan ke Google Sheets. Pastikan Web App sudah di-deploy dengan benar.";
+                });
+        });
+
+        // 2. RENDERING FORM BERDASARKAN HASIL QUERY DATASET EXCEL
+        // RENDERING FORM BERDASARKAN NAMA DIMENSI ASLI DARI EXCEL
+        function renderQuestions(questions) {
+            const container = document.getElementById('dynamicQuestionsContainer');
+            let currentDimensionName = "";
+
+            questions.forEach(q => {
+                // Jika nama dimensi berubah, buat pembatas section baru menggunakan Nama Lengkap Dimensi
+                if (q.dimensionName !== currentDimensionName) {
+                    currentDimensionName = q.dimensionName;
+
+                    const sectionHeader = document.createElement('div');
+                    sectionHeader.className = 'section-title';
+                    sectionHeader.innerText = currentDimensionName; // Menampilkan "Operational Complexity", bukan "OPR"
+                    container.appendChild(sectionHeader);
+                }
+
+                // Buat Form Group untuk wadah Pertanyaan
+                const formGroup = document.createElement('div');
+                formGroup.className = 'form-group';
+
+                const label = document.createElement('label');
+                label.innerText = q.question;
+                formGroup.appendChild(label);
+
+                const select = document.createElement('select');
+                select.name = q.id;
+                select.id = q.id;
+                select.required = true;
+
+                // Pengondisian jika baris data OPTIONS di Excel kosong, beri fallback standar
+                if (q.options.length === 0 && q.type === "Likert") {
+                    q.options = [{label: "Tidak", score: 1}, {label: "Ya", score: 5}];
+                } else if (q.options.length === 0) {
+                    q.options = [{label: "1 - Rendah", score: 1}, {label: "3 - Sedang", score: 3}, {label: "5 - Tinggi", score: 5}];
+                }
+
+                // Masukkan opsi pilihan ke dalam dropdown select
+                q.options.forEach(opt => {
+                    const optionEl = document.createElement('option');
+                    optionEl.value = opt.score;
+                    optionEl.innerText = opt.label;
+                    select.appendChild(optionEl);
+                });
+
+                formGroup.appendChild(select);
+                container.appendChild(formGroup);
+            });
+        }
+
+        // Menentukan tampilan diagnosis visual (warna, label, rotasi jarum) berdasarkan skor
+        function applyVerdictVisual(score) {
+            const s = Math.max(0, Math.min(100, Number(score) || 0));
+            const rotation = -90 + (s / 100) * 180;
+            const needle = document.getElementById('resultNeedle');
+            needle.style.transform = `rotate(${rotation}deg)`;
+
+            const badge = document.getElementById('verdictBadge');
+            let label, bg, fg;
+            if (s < 40) {
+                label = '🔴 DARURAT — GANTI SEKARANG';
+                bg = 'rgba(255,71,87,0.16)';
+                fg = '#FF6B78';
+            } else if (s < 70) {
+                label = '🟡 WASPADA — PERLU UPGRADE';
+                bg = 'rgba(255,176,32,0.16)';
+                fg = '#FFC24D';
+            } else {
+                label = '🟢 AMAN — SISTEM MASIH LAYAK';
+                bg = 'rgba(6,214,160,0.16)';
+                fg = '#3EE8B9';
+            }
+            badge.innerText = label;
+            badge.style.background = bg;
+            badge.style.color = fg;
+        }
+
+        // 3. PROSES SUBMIT JAWABAN KUESIONER
+        document.getElementById('siForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.innerText = 'Menghitung Diagnosis Sistem...';
+            submitBtn.disabled = true;
+
+            // Kumpulkan seluruh jawaban dinamis dari form select komponen
+            const answers = {};
+            const selects = document.querySelectorAll('#dynamicQuestionsContainer select');
+            selects.forEach(select => {
+                answers[select.name] = select.value;
+            });
+
+            const payload = {
+                namaPerusahaan: document.getElementById('namaPerusahaan').value,
+                industry: document.getElementById('industry').value,
+                answers: answers
+            };
+
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('resId').innerText = data.assessmentId;
+                    document.getElementById('resSkor').innerText = data.score;
+                    document.getElementById('resLevel').innerText = data.level;
+                    document.getElementById('recAlat').innerText = data.recommendation;
+                    document.getElementById('recModul').innerText = data.priorityModules.join(', ');
+
+                    applyVerdictVisual(data.score);
+
+                    document.getElementById('hasil').style.display = 'block';
+                    document.getElementById('hasil').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    alert('Error dari sistem internal spreadsheet: ' + data.message);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Gagal mengirimkan assessment. Pastikan hak akses Web App di-set ke "Anyone".');
+            })
+            .finally(() => {
+                submitBtn.innerText = 'Kirim & Cek Diagnosis Sistem Saya';
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+
+</html>
